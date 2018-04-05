@@ -79,6 +79,40 @@ function showSymbol(evt) { //Showing symbol
 
 function addCardToOpenList(evt) {
         openCardList.push(evt.target.firstElementChild);
+        checkTwoCardsMatch(openCardList);
+        checkTwoCardsNotMatch(openCardList);
+
+        if (matchedCardList.length === 8) {
+            //stop timer
+            //win-game-popup
+            console.log("you won")
+        }
+    }
+
+function clearCardOpenList(array) {
+        for (let i = 0; i < 2; i++) {
+            array.shift();
+        }
+        return array;
+    }
+
+function checkTwoCardsMatch(array) {
+        if (array.length === 2 && array[0].className === array[1].className) {
+            array[0].parentNode.className = 'card match show';
+            array[1].parentNode.className = 'card match show';
+            matchedCardList.push(array[0]);
+            clearCardOpenList(array);
+        }
+    }
+
+function checkTwoCardsNotMatch(array) {
+        if (array.length === 2 && array[0].className !== array[1].className) {
+            setTimeout(function () {
+                array[0].parentNode.className = 'card close';
+                array[1].parentNode.className = 'card close';
+                clearCardOpenList(array);
+            }, 800);
+        }
     }
 
 // Timer function's
