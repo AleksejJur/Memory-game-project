@@ -14,7 +14,7 @@ let stars = document.querySelector('.stars');
 let allStars = document.querySelectorAll(".stars i");
 
 // CREATING CONST FOR GAME
-
+const popup = document.getElementById("popup");
 const minutesLabel = document.getElementById("minutes");
 const secondsLabel = document.getElementById("seconds"); 
 const timer = document.querySelector('.timer');
@@ -23,12 +23,16 @@ const startMoves = "0 Moves";
 const restart = document.querySelector('.restart');
 const allCards = document.querySelectorAll('.deck li');
 const deck = document.querySelector('.deck');
+const delayInMilliseconds = 2000; //2 seconds
 
 //GLOBAL FUNCTION THAT WE CALL AT PAGE START
 
 function game() {
     addRandomSymbolToCard(allCards);
-    setInterval(setTime, 1000);
+        setTimeout(function() {
+        setInterval(setTime, 1000);
+    }, delayInMilliseconds);
+    
 }
 
 // Game functions
@@ -61,7 +65,7 @@ function showSymbol(evt) { //Showing symbol
         evt.target.className = 'card open show';
         movesCounter += 1;
         movesElement.innerHTML = movesCounter + " Moves";
-
+        addCardToOpenList(evt);
         if (movesCounter === 16) {
             stars.lastElementChild.className = 'fa fa-star-o';
         } else if (movesCounter === 24) {
@@ -72,6 +76,10 @@ function showSymbol(evt) { //Showing symbol
 
         // evt.target.isClicked = 1; with this we will check if card clicked twice
 }
+
+function addCardToOpenList(evt) {
+        openCardList.push(evt.target.firstElementChild);
+    }
 
 // Timer function's
 
@@ -92,25 +100,21 @@ function pad(val) {
 
 // Timer function end
 
-function resetGame() { //Reseting game
-    for (let card of allCards) { //Closing all cards
-            card.className = "card close";
-            // card.isClicked = 0;
-        }
-    addRandomSymbolToCard(allCards); //Shuffling all cards
-    document.getElementById("minutes").innerHTML = "00";
-    document.getElementById("seconds").innerHTML = "00";
-    totalSeconds = 0;
-    movesCounter = 0;
-
-    for (i = 0; i < allStars.length; i++) { //New JS syntax  TODO
-            allStars[i].className = "fa fa-star";
-        }
-//     for (let star of stars) { //Closing all cards
-//             star.className = "fa fa-star";
+// function resetGame() { //Reseting game
+//     for (let card of allCards) { //Closing all cards
+//             card.className = "card close";
 //             // card.isClicked = 0;
 //         }
-}
+//     addRandomSymbolToCard(allCards); //Shuffling all cards
+//     document.getElementById("minutes").innerHTML = "00";
+//     document.getElementById("seconds").innerHTML = "00";
+//     totalSeconds = 0;
+//     movesCounter = 0;
+
+//     for (i = 0; i < allStars.length; i++) { //New JS syntax  TODO
+//             allStars[i].className = "fa fa-star";
+//         }
+// }
 
 //Game event listeners
 
@@ -120,23 +124,27 @@ deck.addEventListener('click', function (evt) {
     }
 })
 
-restart.addEventListener('click', function () { //reseting game
-        resetGame();
+// restart.addEventListener('click', function () { //reseting game
+//         resetGame();
+// })
+
+popup.addEventListener('click', function () {
+    for (let card of allCards) { //Opening all cards
+            card.className = "card open show";
+    }
+
+    setTimeout(function() {
+        for (let card of allCards) { //Closing all cards
+                card.className = "card close";
+        }
+    }, delayInMilliseconds);
 })
 
-/* check if card 1 = card 2 >leave open
-    else cards closed
-
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-
+window.onload = function () {
+    popup.classList.remove("hidden");/* Show the popup. */
+    setTimeout(()=>popup.classList.add("fade-in")); //Fade the popup in 
+    document.getElementById("popup").onclick = function () { //Close the popup when it's clicked. 
+    setTimeout(()=>popup.classList.add("hidden"));/* Hide the popup. */
+    game(); // start all game
+    };
+};

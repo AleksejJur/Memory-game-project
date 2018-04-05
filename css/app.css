@@ -114,3 +114,40 @@ h1 {
     float: right;
     cursor: pointer;
 }
+
+
+/*NNNNNNNNNNNNNNNNNNNEEEEEEEEEEEEWWWWWWWWWWWWWWWWWWWW8*/
+
+#popup {
+  display: inline-block;
+  opacity: 0;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  padding: 1em;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #888;
+  box-shadow: 1px 1px .5em 0 rgba(0, 0, 0, .5);
+  transition: opacity .3s ease-in-out;
+  height: 50%;
+  width:60%;
+  text-align: center;
+}
+
+#popup.hidden {
+  display: none;
+}
+#popup.fade-in {
+  opacity: 1;
+}
+
+
+
+.startGame{
+    position: absolute;
+    bottom: 0;
+    right: 35%;
+    left: 35%;
+    color:grey;
+}
