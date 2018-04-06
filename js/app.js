@@ -32,7 +32,6 @@ function game() {
         setTimeout(function() {
         setInterval(setTime, 1000);
     }, delayInMilliseconds);
-    
 }
 
 // Game functions
@@ -52,68 +51,70 @@ function shuffle(array) { // Shuffle function from http://stackoverflow.com/a/24
 }
 
 function addRandomSymbolToCard(array) {  //Add random symbol to our deck li child
-        let shuffleCardList = shuffle(cardsList); // Each time we creating shuffled cardList
-        for (i = 0; i < array.length; i++) { //New JS syntax  TODO
-            array[i].firstElementChild.className = shuffleCardList[i] + " closed";
-        }
+    let shuffleCardList = shuffle(cardsList); // Each time we creating shuffled cardList
+    for (i = 0; i < array.length; i++) { //New JS syntax  TODO
+        array[i].firstElementChild.className = shuffleCardList[i] + " closed";
+    }
 
-        // timer.innerHTML = timerStart;
-        movesElement.innerHTML = startMoves;
+    // timer.innerHTML = timerStart;
+    movesElement.innerHTML = startMoves;
 }
 
 function showSymbol(evt) { //Showing symbol
-        evt.target.className = 'card open show';
-        movesCounter += 1;
-        movesElement.innerHTML = movesCounter + " Moves";
-        addCardToOpenList(evt);
-        if (movesCounter === 16) {
-            stars.lastElementChild.className = 'fa fa-star-o';
-        } else if (movesCounter === 24) {
-            stars.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
-        } else if(movesCounter === 32) {
-            stars.firstElementChild.className = 'fa fa-star-o';
-        }
-
-        // evt.target.isClicked = 1; with this we will check if card clicked twice
+    evt.target.className = 'card open show';
+    movesCounter += 1;
+    movesElement.innerHTML = movesCounter + " Moves";
+    addCardToOpenList(evt);
+    if (movesCounter === 17) {
+        stars.lastElementChild.className = 'fa fa-star-o';
+    } else if (movesCounter === 24) {
+        stars.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
+    } else if(movesCounter === 32) {
+        stars.firstElementChild.className = 'fa fa-star-o';
+    }
 }
 
 function addCardToOpenList(evt) {
-        openCardList.push(evt.target.firstElementChild);
-        checkTwoCardsMatch(openCardList);
-        checkTwoCardsNotMatch(openCardList);
+    openCardList.push(evt.target.firstElementChild);
+    checkTwoCardsMatch(openCardList);
+    checkTwoCardsNotMatch(openCardList);
 
-        if (matchedCardList.length === 8) {
-            //stop timer
-            //win-game-popup
-            console.log("you won")
-        }
+    if (matchedCardList.length === 8) {
+        //stop timer
+        //win-game-popup
+        timerEnd = timer;
+        document.getElementById('winTime').innerHTML = 'Your Time : ' + movesCounter;
+        // document.getElementById('winStars').innerHTML = 'Your Stars : ' + allStars;
+        document.getElementById('winMoves').innerHTML = 'Your Moves : ' + movesCounter;
+        popupWin();
     }
+}
 
 function clearCardOpenList(array) {
-        for (let i = 0; i < 2; i++) {
-            array.shift();
-        }
-        return array;
+    for (let i = 0; i < 2; i++) {
+        array.shift();
     }
+    return array;
+}
 
 function checkTwoCardsMatch(array) {
-        if (array.length === 2 && array[0].className === array[1].className) {
-            array[0].parentNode.className = 'card match show';
-            array[1].parentNode.className = 'card match show';
-            matchedCardList.push(array[0]);
-            clearCardOpenList(array);
-        }
+    if (array.length === 2 && array[0].className === array[1].className) {
+        array[0].parentNode.className = 'card match show';
+        array[1].parentNode.className = 'card match show';
+        matchedCardList.push(array[0]);
+        clearCardOpenList(array);
     }
+}
 
 function checkTwoCardsNotMatch(array) {
-        if (array.length === 2 && array[0].className !== array[1].className) {
-            setTimeout(function () {
-                array[0].parentNode.className = 'card close';
-                array[1].parentNode.className = 'card close';
-                clearCardOpenList(array);
-            }, 800);
-        }
+    if (array.length === 2 && array[0].className !== array[1].className) {
+        setTimeout(function () {
+            array[0].parentNode.className = 'card close';
+            array[1].parentNode.className = 'card close';
+            clearCardOpenList(array);
+        }, 800);
     }
+}
 
 // Timer function's
 
@@ -182,3 +183,11 @@ window.onload = function () {
     game(); // start all game
     };
 };
+
+function popupWin() {
+    popupWin.classList.remove("hidden");/* Show the popup. */
+    setTimeout(()=>popupWin.classList.add("fade-in")); //Fade the popup in 
+    document.getElementById("popup").onclick = function () { //Close the popup when it's clicked. 
+    setTimeout(()=>popupWin.classList.add("hidden"));/* Hide the popup. */
+    };
+}

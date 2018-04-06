@@ -21,22 +21,27 @@ body {
     font-family: 'Coda', cursive;
 }
 
+h1 {
+    font-weight: 300;
+}
+
+h3 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+p {
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+span {
+    font-family: 'Montserrat', sans-serif;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
-}
-
-
-.timer {
-    display: inline-block;
-    margin-left: 10em;
 }
 
 /*
@@ -79,6 +84,7 @@ h1 {
 
 .deck .card.show {
     font-size: 33px;
+    pointer-events: none;
 }
 
 .deck .card.match {
@@ -115,10 +121,41 @@ h1 {
     cursor: pointer;
 }
 
+.timer {
+    display: inline-block;
+    margin-left: 10em;
+}
 
-/*NNNNNNNNNNNNNNNNNNNEEEEEEEEEEEEWWWWWWWWWWWWWWWWWWWW8*/
+
+/*
+ * Styles for the Popup's
+ */
 
 #popup {
+  display: inline-block;
+  opacity: 0;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  padding: 1em;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #888;
+  box-shadow: 1px 1px .5em 0 rgba(0, 0, 0, .5);
+  transition: opacity .3s ease-in-out;
+  height: 60%;
+  width:60%;
+  text-align: center;
+}
+
+#popup.hidden {
+  display: none;
+}
+#popup.fade-in {
+  opacity: 1;
+}
+
+#popupWin {
   display: inline-block;
   opacity: 0;
   position: fixed;
@@ -135,13 +172,12 @@ h1 {
   text-align: center;
 }
 
-#popup.hidden {
+#popupWin.hidden {
   display: none;
 }
-#popup.fade-in {
+#popupWin.fade-in {
   opacity: 1;
 }
-
 
 
 .startGame{

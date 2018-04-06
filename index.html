@@ -18,7 +18,16 @@
         <div id="popup" class="hidden">
             <h1>Memory Game</h1>
             <h3>Instructions</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet dolorem blanditiis ad perferendis, labore delectus, facere mollitia eius distinctio voluptates aliquid doloremque fugiat est eum. Doloremque aut aperiam enim voluptatibus sequi illum maxime suscipit ipsa ut, quasi, adipisci voluptates aliquid alias beatae reprehenderit incidunt, iusto laboriosam odio vel deleniti voluptas?</p>
+            <ol>
+                <li>You will see all card's opened for 2 seconds.</li>
+                <li>Try to remember as much as you can.</li>
+                <li>When the game starts click on card.</li>
+                <li>Click on another card.</li>
+                <li>If card 1 = card 2 they will leave opened.</li>
+                <li>If card 1 != card 2, they will close.</li>
+                <li>Repeat untill all cards will be opened and check your rating and time.</li>
+            </ol>
+            <p>P.S. perfect rating it's 16 moves, GL/HF! ;)</p>
             <p class="startGame">Tap anywhere to start</p>
         </div>
 
@@ -94,6 +103,15 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
+    </div>
+
+    <div id="popupWin" class="hidden">
+        <h1>Congratulations</h1>
+        <h3>You won!</h3>
+        <p id="winTime">Your Time : </p>
+        <p id="wintStars">Your Stars : </p>
+        <p id="winMoves">Your Moves : </p>
+        <p class="startGame">Play again</p>
     </div>
 
     <script src="js/app.js"></script>
