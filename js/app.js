@@ -15,6 +15,7 @@ let allStars = document.querySelectorAll(".stars i");
 
 // CREATING CONST FOR GAME
 const popup = document.getElementById("popup");
+const popupWin = document.getElementById("popupWin");
 const minutesLabel = document.getElementById("minutes");
 const secondsLabel = document.getElementById("seconds"); 
 const timer = document.querySelector('.timer');
@@ -83,10 +84,10 @@ function addCardToOpenList(evt) {
         //stop timer
         //win-game-popup
         timerEnd = timer;
-        document.getElementById('winTime').innerHTML = 'Your Time : ' + movesCounter;
+        // document.getElementById('winTime').innerHTML = 'Your Time : ' + movesCounter;
         // document.getElementById('winStars').innerHTML = 'Your Stars : ' + allStars;
-        document.getElementById('winMoves').innerHTML = 'Your Moves : ' + movesCounter;
-        popupWin();
+        // document.getElementById('winMoves').innerHTML = 'Your Moves : ' + movesCounter;
+        popupFinish();
     }
 }
 
@@ -184,7 +185,7 @@ window.onload = function () {
     };
 };
 
-function popupWin() {
+function popupFinish() {
     popupWin.classList.remove("hidden");/* Show the popup. */
     setTimeout(()=>popupWin.classList.add("fade-in")); //Fade the popup in 
     document.getElementById("popup").onclick = function () { //Close the popup when it's clicked. 
