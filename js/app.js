@@ -178,9 +178,15 @@ popup.addEventListener('click', function () {
 
 window.onload = function () {
     popup.classList.remove("hidden");/* Show the popup. */
+    deck.style.display = 'none';
+    document.querySelector('header').style.display = 'none';
+    document.querySelector('.score-panel').style.display = 'none';
     setTimeout(()=>popup.classList.add("fade-in")); //Fade the popup in 
     document.getElementById("popup").onclick = function () { //Close the popup when it's clicked. 
     setTimeout(()=>popup.classList.add("hidden"));/* Hide the popup. */
+    deck.style.display = '';
+    document.querySelector('header').style.display = '';
+    document.querySelector('.score-panel').style.display = '';
     game(); // start all game
     };
 };
