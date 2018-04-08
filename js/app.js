@@ -62,7 +62,7 @@ function addRandomSymbolToCard(array) {  // Add random symbol to our deck li chi
     for (i = 0; i < array.length; i++) {
         array[i].firstElementChild.className = shuffleCardList[i] + " closed";
     }
-    
+
     movesElement.innerHTML = startMoves; // Displaying moves
 }
 
@@ -75,7 +75,7 @@ function showSymbol(evt) { //Showing symbol
         stars.lastElementChild.className = 'fa fa-star-o';
     } else if (movesCounter === 24) {
         stars.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
-    } else if(movesCounter === 32) {
+    } else if(movesCounter === 33) {
         stars.firstElementChild.className = 'fa fa-star-o';
     }
 }
