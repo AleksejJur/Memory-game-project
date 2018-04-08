@@ -11,6 +11,7 @@ let playerStars = 3; // Players life’s / rating
 let openCardList = []; // Opened Card List
 let matchedCardList = []; // Card list that matched
 let stars = document.querySelector('.stars');
+let winStar = document.querySelector('#winStars');
 let allStars = document.querySelectorAll(".stars i");
 
 // CREATING CONST FOR GAME
@@ -25,8 +26,14 @@ const restart = document.querySelector('.restart');
 const allCards = document.querySelectorAll('.deck li');
 const deck = document.querySelector('.deck');
 const delayInMilliseconds = 2000; //2 seconds
+const head = document.querySelector('header');
+const scorePan = document.querySelector('.score-panel');
 
-//GLOBAL FUNCTION THAT WE CALL AT PAGE START
+// Call at page start
+
+deck.style.display = 'none';
+head.style.display = 'none';
+scorePan.style.display = 'none';
 
 function game() {
     addRandomSymbolToCard(allCards);
@@ -57,7 +64,6 @@ function addRandomSymbolToCard(array) {  //Add random symbol to our deck li chil
         array[i].firstElementChild.className = shuffleCardList[i] + " closed";
     }
 
-    // timer.innerHTML = timerStart;
     movesElement.innerHTML = startMoves;
 }
 
@@ -79,14 +85,22 @@ function addCardToOpenList(evt) {
     openCardList.push(evt.target.firstElementChild);
     checkTwoCardsMatch(openCardList);
     checkTwoCardsNotMatch(openCardList);
-
     if (matchedCardList.length === 8) {
         //stop timer
         //win-game-popup
         timerEnd = timer;
-        // document.getElementById('winTime').innerHTML = 'Your Time : ' + movesCounter;
-        // document.getElementById('winStars').innerHTML = 'Your Stars : ' + allStars;
-        // document.getElementById('winMoves').innerHTML = 'Your Moves : ' + movesCounter;
+        document.getElementById('winTime').innerHTML = 'Your Time : ' + timerEnd.firstElementChild.textContent + ":" + timerEnd.lastElementChild.textContent;
+    
+
+    // if (movesCounter >= 17) {
+    //     winStar.lastElementChild.className = 'fa fa-star-o';
+    // } else if (movesCounter >= 24) {
+    //     winStar.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
+    // } else if(movesCounter >= 32) {
+    //     winStar.firstElementChild.className = 'fa fa-star-o';
+    // }
+        // document.getElementById('winStars').innerHTML = 'Your Stars : ' + stars.firstElementChild + stars.lastElementChild.previousElementSibling + stars.lastElementChild;
+        document.getElementById('winMoves').innerHTML = 'Your Moves : ' + parseInt(movesElement.textContent);
         popupFinish();
     }
 }
@@ -177,24 +191,34 @@ popup.addEventListener('click', function () {
 })
 
 window.onload = function () {
-    popup.classList.remove("hidden");/* Show the popup. */
-    deck.style.display = 'none';
-    document.querySelector('header').style.display = 'none';
-    document.querySelector('.score-panel').style.display = 'none';
+    popup.classList.remove("hidden"); // Show the popup.
+    
     setTimeout(()=>popup.classList.add("fade-in")); //Fade the popup in 
     document.getElementById("popup").onclick = function () { //Close the popup when it's clicked. 
-    setTimeout(()=>popup.classList.add("hidden"));/* Hide the popup. */
+    setTimeout(()=>popup.classList.add("hidden")); // Hide the popup.
     deck.style.display = '';
-    document.querySelector('header').style.display = '';
-    document.querySelector('.score-panel').style.display = '';
+    head.style.display = '';
+    scorePan.style.display = '';
     game(); // start all game
     };
 };
 
 function popupFinish() {
-    popupWin.classList.remove("hidden");/* Show the popup. */
+    scorePan.style.display = 'none';
+    checkStars();
+    popupWin.classList.remove("hidden"); // Show the popup.
     setTimeout(()=>popupWin.classList.add("fade-in")); //Fade the popup in 
     document.getElementById("popup").onclick = function () { //Close the popup when it's clicked. 
-    setTimeout(()=>popupWin.classList.add("hidden"));/* Hide the popup. */
+    setTimeout(()=>popupWin.classList.add("hidden")); // Hide the popup.
     };
+}
+
+function checkStars() {
+    if (movesCounter >= 17) {
+        winStar.lastElementChild.className = 'fa fa-star-o';
+    } else if (movesCounter >= 24) {
+        winStar.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
+    } else if(movesCounter >= 32) {
+        winStar.firstElementChild.className = 'fa fa-star-o';
+    }
 }
