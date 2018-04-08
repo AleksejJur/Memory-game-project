@@ -13,8 +13,8 @@ To play again just click reset button on the leaderboard.
 
 Good Luck
 
-How to play
+# How to play
 Download and open index.html in any browser.
 
-Contributing
+# Contributing
 This repository is the starter code for all Udacity students.
