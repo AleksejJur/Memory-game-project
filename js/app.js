@@ -199,3 +199,6 @@ popup.addEventListener('click', function () {
     }, delayInMilliseconds);
 });
 
+restart.addEventListener('click', function () { //reseting game
+    resetGame();
+})
