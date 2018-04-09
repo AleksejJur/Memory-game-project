@@ -136,6 +136,24 @@ function pad(val) {
   }
 }
 
+function resetGame() { //Reseting game
+    for (let card of allCards) { //Closing all cards
+            card.className = "card close";
+            // card.isClicked = 0;
+        }
+    addRandomSymbolToCard(allCards); //Shuffling all cards
+    document.getElementById("minutes").innerHTML = "00";
+    document.getElementById("seconds").innerHTML = "00";
+    totalSeconds = 0;
+    movesCounter = 0;
+    clearCardOpenList(openCardList);
+    clearCardOpenList(matchedCardList);
+
+    for (i = 0; i < allStars.length; i++) { //New JS syntax  TODO
+            allStars[i].className = "fa fa-star";
+        }
+} 
+
 window.onload = function () { // Call start PopUp on page load
     popup.classList.remove("hidden"); // Show the popup.
     setTimeout(()=>popup.classList.add("fade-in")); //Fade the popup in 
@@ -154,14 +172,17 @@ function popupFinish() { // Call win PopUp
     setTimeout(()=>popupWin.classList.add("fade-in")); //Fade the popup in 
     document.getElementById("popupWin").onclick = function () { //Close the popup when it's clicked
     setTimeout(()=>popupWin.classList.add("hidden")); // Hide the popup
-    window.location.reload(); // Restart after click
+    resetGame();
+    deck.style.display = ''; // Display deck
+    head.style.display = ''; // Display header
+    scorePan.style.display = ''; // Display score panel
     };
 };
 
 //Game event listeners
 
 deck.addEventListener('click', function (evt) {
-    if (!(evt.target.className === 'deck')) {
+    if (!(evt.target.className === 'deck')) { // cia tikrinu su boolean true/fallse if 2 cards opened cant click 3
         showSymbol(evt);
     }
 })
@@ -177,3 +198,7 @@ popup.addEventListener('click', function () {
         }
     }, delayInMilliseconds);
 });
+
+restart.addEventListener('click', function () { //reseting game
+        resetGame();
+})
