@@ -66,18 +66,21 @@ function addRandomSymbolToCard(array) {  // Add random symbol to our deck li chi
     movesElement.innerHTML = startMoves; // Displaying moves
 }
 
-function showSymbol(evt) { //Showing symbol
-    evt.target.className = 'card open show';
-    movesCounter += 1; // Counting moves
-    movesElement.innerHTML = movesCounter + " Moves";
-    addCardToOpenList(evt);
-    if (movesCounter === 17) { // Cheking how much stars to show
-        stars.lastElementChild.className = 'fa fa-star-o';
-    } else if (movesCounter === 24) {
-        stars.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
-    } else if(movesCounter === 33) {
-        stars.firstElementChild.className = 'fa fa-star-o';
+function showSymbol(evt) { //Showing 
+    if (openCardList.length != 2) { // check for not to open more than 2 cards
+        evt.target.className = 'card open show';
+            movesCounter += 1; // Counting moves
+            movesElement.innerHTML = movesCounter + " Moves";
+            addCardToOpenList(evt);
+            if (movesCounter === 17) { // Cheking how much stars to show
+                stars.lastElementChild.className = 'fa fa-star-o';
+            } else if (movesCounter === 24) {
+                stars.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
+            } else if(movesCounter === 33) {
+                stars.firstElementChild.className = 'fa fa-star-o';
+            }
     }
+    
 }
 
 function addCardToOpenList(evt) { 
