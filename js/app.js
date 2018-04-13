@@ -77,7 +77,7 @@ function showSymbol(evt) { //Showing
             } else if (movesCounter === 24) {
                 stars.lastElementChild.previousElementSibling.className = 'fa fa-star-o';
             } else if(movesCounter === 33) {
-                stars.firstElementChild.className = 'fa fa-star-o';
+                // stars.firstElementChild.className = 'fa fa-star-o';
             }
     }
     
@@ -91,7 +91,7 @@ function addCardToOpenList(evt) {
         timerEnd = timer;
         document.getElementById('winTime').innerHTML = 'Your Time : ' + timerEnd.firstElementChild.textContent + ":" + timerEnd.lastElementChild.textContent;
         document.getElementById('winStars').innerHTML = 'Your Stars : ' + stars.innerHTML;
-        document.getElementById('winMoves').innerHTML = 'Your Moves : ' + parseInt(movesElement.textContent);
+        // document.getElementById('winMoves').innerHTML = 'Your Moves : ' + parseInt(movesElement.textContent);
         popupFinish();
     }
 }
